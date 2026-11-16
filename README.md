@@ -137,8 +137,3 @@ Project: Xonix Remake (Level Balance Specification)
 This project is a non-commercial fan remake created for preservation and educational purposes.  
 
 [MIT](LICENSE)
-## License
-
-This project is a non-commercial fan remake created for preservation and educational purposes.  
-
-[MIT](LICENSE)
