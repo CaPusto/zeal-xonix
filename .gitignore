@@ -1,4 +1,5 @@
 bin/
+docs/
 *.zip
 release/
 tmp/
