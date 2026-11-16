@@ -1,0 +1,12 @@
+bin/
+*.zip
+release/
+tmp/
+assets/*.zt[spm]
+!assets/splash.zts
+!assets/splash.ztp
+!assets/splash.ztm
+*.tiled-session
+.DS_Store
+HISCORE.DAT
+build/

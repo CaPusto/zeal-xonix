@@ -1,0 +1,62 @@
+        zeal-xonix change log
+
+        1.4.1 - 2026-11-16
+
+        * Add a short descending "uh-oh" sound when the player loses one life
+          (the longer "oops" melody remains for game over).
+        * Make the between-level prompt robust: a held or stuck key no longer
+          blocks it, and it advances automatically after 30 seconds.
+        * Speed up territory capture with a span fill that skips whole open and
+          visited byte runs, a trail-byte bitmap, and byte-wide fill fast paths.
+          The large-capture benchmark is about one third faster.
+
+        1.4.0 - 2026-11-16
+
+        * Add synthesized sound effects on the VideoBoard's four voices: a
+          ping-pong blip when a ball bounces, a bell when territory is
+          captured, a continuous buzz on levels with spiders, a sad melody
+          after losing the last life, and a victory fanfare for a new
+          first-place high score.
+        * Stop gameplay sound before the high-score table and stop all sound
+          when the program restarts or exits.
+
+        1.3.0 - 2026-11-16
+
+        * Show a top-ten high-score table when all lives are lost, ask for the
+          player's name when the score qualifies, and save it as HISCORE.DAT
+          next to the binary.  The file uses an XHS1 magic, XOR obfuscation and
+          a 16-bit checksum; missing or corrupted files are ignored.
+        * Wait for a key or 25 seconds on the table, then restart the program
+          from the beginning (including the splash screen when enabled).
+        * Extend the generated HUD font to the full A-Z alphabet for name entry
+          and the high-score table.
+        * Reduce memory use in the tile renderer so the larger program keeps a
+          safe stack.
+
+        1.2.0 - 2026-11-16
+
+        * Add the 21-level campaign from the GDD: per-level ball count and
+          speed, spider count and time limit.
+        * Win a level at 75% captured territory; score uses the GDD multipliers.
+        * Add a HUD with level, timer, progress and score.
+        * Show a blinking yellow ">>> PRESS ANY KEY TO CONTINUE <<<" prompt on
+          the second HUD line between levels, and wait for a key press.
+        * Add an optional splash screen from assets/splash.zts, .ztp and .ztm
+          with fade-in/fade-out; wait for a key or 25 seconds.  Missing files
+          only produce a text-console warning, the game still starts.
+        * Add the "--level N" launch option to start at any level.
+
+        1.1.0 - 2026-11-16
+
+        * Add land spiders: two diagonal enemies patrol the starting frame and
+          all captured LAND; touching one costs a life.
+
+        1.0.1 - 2026-11-16
+
+        * Fix the multi-second freeze that followed every area capture: the
+          capture now only examines the regions next to the trail instead of
+          flood-filling the whole sea cell by cell.
+
+        1.0.0 - 2026-11-06
+
+        * Create new project
