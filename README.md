@@ -54,7 +54,6 @@ project's `assets/` directory into `bin/assets/`.  If the files are present,
 the splash is shown with a fade-in; press any key to continue, or wait 25
 seconds.  It then fades out and level 1 starts.  If the files are missing, a
 warning is printed on the text console and the game starts without the splash.
-`--level N` bypasses the splash, which is convenient for level testing.
 
 ## High scores
 
