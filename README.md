@@ -132,3 +132,8 @@ Project: Xonix Remake (Level Balance Specification)
 * **Level 20** — 5 fast balls | 2 spiders | Time: Reduced by 35%.
 * **Level 21: Final** — 5 fast balls | 1 spider | Time: Reduced by 45%.
 
+## License
+
+This project is a non-commercial fan remake created for preservation and educational purposes.  
+
+[MIT](LICENSE)
