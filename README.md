@@ -1,6 +1,14 @@
 # zeal-xonix
 
-Short description of the project
+A remake Xonix game for the Zeal 8-bit Computer running Zeal 8-bit OS.
+
+## Screenshots
+<table>
+  <tr>
+    <td><img src="docs/RetroXonixNightGamingRoom.png" alt="Title 00" width="400"></td>
+    <td><img src="docs/screenshot_game.png" alt="Title 01" width="400"></td>
+  </tr>
+</table>
 
 ## Requirements
 
@@ -25,10 +33,10 @@ zde cmake
 From the Zeal 8-bit OS shell, on the disk that holds the binary:
 
 ```sh
-./zeal-xonix.bin --level 12
+./zeal-xonix.bin
 ```
 
-`--level` accepts levels `1..21` (default is level 1).  The HUD shows the
+`The HUD shows the
 current level, remaining time, captured percentage and score.
 
 ## Splash screen
@@ -52,53 +60,75 @@ warning is printed on the text console and the game starts without the splash.
 
 When the player runs out of lives, the game shows the top ten results.  If the
 score qualifies (it is greater than zero and either the table has fewer than
-ten entries or the score beats the lowest one), the player is asked for a name:
-
-* `A-Z`, `0-9` and spaces are accepted, up to 8 characters.
-* `Enter` confirms; `Backspace` deletes the last character.
-* An empty name is stored as `PLAYER`.
+ten entries or the score beats the lowest one), the player is asked for a name.
 
 The table is saved as `HISCORE.DAT` in the current directory, i.e. next to the
-game binary when it is started from its own folder.  The file starts with the
-`XHS1` magic, the records are XOR-obfuscated and protected by a 16-bit
-checksum.  A missing, truncated or corrupted file is treated as an empty
+game binary when it is started from its own folder.
+A missing, truncated or corrupted file is treated as an empty
 table.
 
-After the table is shown, press any key or wait 25 seconds.  The program then
-returns to the beginning: the splash is shown again (unless `--level` was
-used) and the game restarts at the selected start level.
+#№ GAME DESIGN DOCUMENT (GDD)
+Project: Xonix Remake (Level Balance Specification)
 
-## Sound effects
+### GENERAL RULES AND GAME MECHANICS
 
-The game synthesizes its effects with the Zeal VideoBoard's four sound voices;
-no external audio files are needed:
+* **Playfield:** A strict classic rectangle. The field geometry is static across all levels. There are no internal partitions, mazes, or obstacles.
+* **Player:** Controls a device that cuts off parts of the field. Moves along captured territory and draws lines through neutral territory.
+* **Enemies (Balls):** Located inside the uncaptured playfield. Bounce off walls and player lines at a 45-degree angle. 3 speed tiers are available: Slow, Medium, Fast. The maximum number of balls on the field is 5.
+* **Enemies (Spiders):** Spiders have a single fixed speed that remains unchanged from level 1 to level 21. The maximum number of spiders per level is 2.
 
-* balls bounce with a short, alternating ping-pong blip;
-* closing a captured area plays a two-note bell;
-* levels with spiders have a continuous low buzz while the spiders are active;
-* losing one life plays a short descending "uh-oh" jingle;
-* losing the last life plays a longer descending "oops" melody;
-* a new number-one result plays a short victory fanfare on the table screen.
+### SCORING AND VICTORY RULES
 
-Gameplay effects stop before the high-score table.  The victory fanfare plays
-only when the new result reaches first place.  Sound is also stopped when the
-program restarts or exits.
+* **Victory Condition (Goal):** Capture at least 75% of the territory on any level.
+* **Base Scoring:** 10 points for each 1% of captured area.
+* **Risk Bonus (Level Score Multipliers):**
+  * **From 75% to 84.9%** — Standard scoring (x1). Minimum passing result (75%) = 750 points.
+  * **From 85% to 90.9%** — Doubling of earned extra points (above 75%) (x2). (Example: 85% = 750 + 10 * 10 * 2 = 950 points).
+  * **From 91% ** — Tripling of earned extra points (above 85%) (x3). (Example: 91% = 750 + 16 * 10 * 3 = 1230 points).
+* **Time Bonus:** None. Remaining time on the timer yields 0 points. The timer serves strictly as a hard life limiter.
 
-## Capture performance
+### LIVES AND CONTINUES SYSTEM
 
-Territory capture uses a scanline span fill.  Whole open and already-visited
-bytes are skipped in one pass, the trail is tracked byte-by-byte instead of
-scanning its full bounding box, and fully filled bytes are written directly.
-This shortens the pause after a large capture.
+* **Starting Lives:** The player starts the game with 5 lives.
+* **Losing a Life:** Occurs when a Ball collides with an incomplete player line, when a Spider collides with the player on the border, or when the time limit expires.
+* **Level Progress Reset:** Upon losing a life, the current level restarts, the percentage of captured territory resets to 0%, and points earned during the current attempt are lost. Points earned on previous levels are preserved.
 
-The between-level prompt also arms itself after one second even if a key is
-held, and advances automatically after 30 seconds, so a stuck key cannot leave
-the game waiting forever.
+---
 
-## Create Another Project
+### LEVEL PROGRESSION (BALANCE AND DIFFICULTY GRID)
 
-To create another ZGDK project from the same template, run:
+* Standard time to complete a level is 5 minutes.
+* The movement speed of a "Medium ball" is 20% faster than a "Slow ball".
+* The movement speed of a "Fast ball" is 40% faster than a "Slow ball".
+* The movement speed of spiders is equal to half the movement speed of the player's sprite.
 
-```sh
-zde create zgdk --name my-game
-```
+#### Stage 1: Introduction and the First Spider (Balls: 1–3, Spiders: 0–1)
+
+* **Level 1** — 1 slow ball | 0 spiders | Time: Standard.
+* **Level 2** — 1 medium ball | 0 spiders | Time: Standard.
+* **Level 3** — 2 slow balls | 0 spiders | Time: Standard.
+* **Level 4** — 2 medium balls | 0 spiders | Time: Standard.
+* **Level 5** — 2 medium balls | 1 spider | Time: Standard.
+* **Level 6** — 3 slow balls | 1 spider | Time: Standard.
+* **Level 7** — 3 medium balls | 1 spider | Time: Standard.
+
+#### Stage 2: Picking Up the Pace and the Second Spider (Balls: 3–4, Spiders: 1–2)
+
+* **Level 8** — 3 fast balls | 1 spider | Time: Standard.
+* **Level 9** — 3 fast balls | 1 spider | Time: Reduced by 15%.
+* **Level 10** — 4 slow balls | 1 spider | Time: Standard.
+* **Level 11** — 4 medium balls | 1 spider | Time: Standard.
+* **Level 12** — 4 medium balls | 2 spiders | Time: Standard.
+* **Level 13** — 4 fast balls | 2 spiders | Time: Standard.
+* **Level 14** — 4 fast balls | 2 spiders | Time: Reduced by 25%.
+
+#### Stage 3: Peak Loads (Balls: 5, Spiders: 2)
+
+* **Level 15** — 5 slow balls | 2 spiders | Time: Standard.
+* **Level 16** — 5 medium balls | 2 spiders | Time: Standard.
+* **Level 17** — 5 medium balls | 2 spiders | Time: Reduced by 20%.
+* **Level 18** — 5 fast balls | 2 spiders | Time: Standard.
+* **Level 19** — 5 fast balls | 2 spiders | Time: Reduced by 20%.
+* **Level 20** — 5 fast balls | 2 spiders | Time: Reduced by 35%.
+* **Level 21: Final** — 5 fast balls | 1 spider | Time: Reduced by 45%.
+
