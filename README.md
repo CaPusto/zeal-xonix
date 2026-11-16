@@ -132,6 +132,14 @@ Project: Xonix Remake (Level Balance Specification)
 * **Level 20** — 5 fast balls | 2 spiders | Time: Reduced by 35%.
 * **Level 21: Final** — 5 fast balls | 1 spider | Time: Reduced by 45%.
 
+## Real hardware
+
+This game has been tested **only under the Zeal 8-bit OS reference
+emulator** — the author does not have a Zeal 8-bit computer at hand. There is
+**no guarantee it works on real hardware** (timing, video timing, SD/ROM
+behaviour and input can all differ), although nothing platform-specific is
+used beyond the standard SDK APIs. Testing on real hardware is very welcome.
+
 ## License
 
 This project is a non-commercial fan remake created for preservation and educational purposes.  
