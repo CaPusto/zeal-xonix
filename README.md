@@ -1,6 +1,6 @@
 # zeal-xonix
 
-A remake Xonix game for the Zeal 8-bit Computer running Zeal 8-bit OS.
+A Xonix remake for the Zeal 8-bit Computer running Zeal 8-bit OS.
 
 ## Screenshots
 <table>
@@ -133,11 +133,12 @@ Project: Xonix Remake (Level Balance Specification)
 
 ## Real hardware
 
-This game has been tested **only under the Zeal 8-bit OS reference
-emulator** — the author does not have a Zeal 8-bit computer at hand. There is
-**no guarantee it works on real hardware** (timing, video timing, SD/ROM
-behaviour and input can all differ), although nothing platform-specific is
-used beyond the standard SDK APIs. Testing on real hardware is very welcome.
+>[!NOTE]
+>This game has been tested **only under the Zeal 8-bit OS reference
+>emulator** — the author does not have a Zeal 8-bit computer at hand. There is
+>**no guarantee it works on real hardware** (timing, video timing, SD/ROM
+>behaviour and input can all differ), although nothing platform-specific is
+>used beyond the standard SDK APIs. Testing on real hardware is very welcome.
 
 ## License
 
