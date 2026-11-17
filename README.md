@@ -83,7 +83,7 @@ Project: Xonix Remake (Level Balance Specification)
 * **Risk Bonus (Level Score Multipliers):**
   * **From 75% to 84.9%** — Standard scoring (x1). Minimum passing result (75%) = 750 points.
   * **From 85% to 90.9%** — Doubling of earned extra points (above 75%) (x2). (Example: 85% = 750 + 10 * 10 * 2 = 950 points).
-  * **From 91% ** — Tripling of earned extra points (above 85%) (x3). (Example: 91% = 750 + 16 * 10 * 3 = 1230 points).
+  * **From 91%** — Tripling of earned extra points (above 85%) (x3). (Example: 91% = 750 + 16 * 10 * 3 = 1230 points).
 * **Time Bonus:** None. Remaining time on the timer yields 0 points. The timer serves strictly as a hard life limiter.
 
 ### LIVES AND CONTINUES SYSTEM
