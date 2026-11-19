@@ -5,7 +5,7 @@ A Xonix remake for the Zeal 8-bit Computer running Zeal 8-bit OS.
 ## Screenshots
 <table>
   <tr>
-    <td><img src="docs/RetroXonixNightGamingRoom.png" alt="Title 00" width="400"></td>
+    <td><img src="docs/Retro-XonixNightGamingRoom.png" alt="Title 00" width="400"></td>
     <td><img src="docs/screenshot_game.png" alt="Title 01" width="400"></td>
   </tr>
 </table>
